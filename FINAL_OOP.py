@@ -1,13 +1,15 @@
 import requests
 from pprint import pprint
 import json
-from yan_token import tok
 
-text = input()
-url = f'https://cataas.com/cat/says/{text}'
+
+text = input('Введите сюда текст для картинки: ')
+tok = input('Сюда токен с яндекс, если он у вас есть: ')
+url = f'https://cataas.com/cat/says/{text}?json=true'
 response = requests.get(url)
-image_cat = response.content
-
+image = requests.get(response.json()['url'])
+image_cat = image.content
+pprint(response.json())
 
 
 params = {
